@@ -19,6 +19,7 @@ class Alert extends EventEmitter {
 
     // Set public variables
     this.alerts = [];
+    this.defaultPosition = 'top-right';
 
     // Set private variables
     this._alerts = this._alerts.bind(this);
@@ -128,7 +129,7 @@ class Alert extends EventEmitter {
 
     // Set opts visible and position
     opts.visible = true;
-    opts.position = opts.position || 'top-right';
+    opts.position = opts.position || this.defaultPosition;
 
     // Check id
     if (!opts.id) opts.id = this._uuid();
@@ -176,6 +177,16 @@ class Alert extends EventEmitter {
 
     // Do notification
     new window.Notification(title, opts);
+  }
+
+  /**
+   * set default position
+   *
+   * @param {String} position 
+   */
+  setDefaultPosition(position) {
+    // sets default position
+    this.defaultPosition = position;
   }
 
   /**

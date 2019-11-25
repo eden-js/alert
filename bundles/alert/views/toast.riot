@@ -1,0 +1,101 @@
+<toast>
+  <div each={ (position, a) in getPositions() } class={ `eden-toast eden-toast-${position}` }>
+    <toast-alert each={ (item, b) in alerts(position) } item={ item } on-dismiss={ onDismiss } />
+  </div>
+
+	<script>
+    // require base class
+    import Base from './js/base';
+
+    // export default
+    export default class Toast extends Base {
+      /**
+       * on before mount
+       */
+      onBeforeMount(...args) {
+        // on before mount
+        super.onBeforeMount(...args);
+
+        // on alert
+        this.onAlert = () => {
+          // update
+          this.update();
+        };
+      }
+
+      /**
+       * on before mount
+       */
+      onMounted(...args) {
+        // on before mount
+        super.onMounted(...args);
+
+        // frontend check
+        if (!this.eden.frontend) return;
+
+        // on alert
+        eden.get('alert').on('update', this.onAlert);
+      }
+
+      /**
+       * on before mount
+       */
+      onBeforeUnmount(...args) {
+        // on before mount
+        super.onBeforeUnmount(...args);
+
+        // frontend check
+        if (!this.eden.frontend) return;
+
+        // on alert
+        eden.get('alert').removeListener('update', this.onAlert);
+      }
+
+      /**
+       * Returns alerts by placement
+       *
+       * @param  {string} placement
+       *
+       * @return {array}
+       */
+      alerts(position) {
+        // Loop alerts
+        return ((this.eden.get('alert') || {}).alerts || []).filter((alert) => alert.position === position);
+      }
+
+      /**
+       * On dismiss function
+       *
+       * @param {Event} e
+       */
+      onDismiss (e, alert) {
+        // Prevent default
+        e.preventDefault();
+
+        // Check alert
+        if (alert) {
+          // Clear timeout
+          clearTimeout(alert.timeout);
+
+          // Close alert
+          alert.close();
+        }
+      }
+
+      /**
+       * get positions
+       */
+      getPositions() {
+        // Set positions
+        return [
+          'top-left',
+          'top-right',
+          'bottom-left',
+          'bottom-right',
+          'top-full',
+          'bottom-full'
+        ];
+      }
+    }
+	</script>
+</toast>

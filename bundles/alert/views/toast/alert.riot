@@ -1,0 +1,25 @@
+<toast-alert>
+  <div class={ getClass() } role="alert">
+    <button type="button" class="close" if={ eden.frontend } data-id={ props.item.id } onclick={ (e) => props.onDismiss(e, props.item) }>
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong class="mr-3" if={ props.item.title }>{ props.item.title }</strong> <raw html={ props.item.text } />
+  </div>
+
+  <script>
+    // require base class
+    import Base from '../js/base';
+
+    // export default
+    export default class ToastAlert extends Base {
+
+      /**
+       * get class
+       */
+      getClass() {
+        // return
+        return `alert alert-${this.props.item.type || 'info'} alert-dismissible fade ${this.props.item.visible ? 'show' : 'hide'}`;
+      }
+    }
+  </script>
+</toast-alert>

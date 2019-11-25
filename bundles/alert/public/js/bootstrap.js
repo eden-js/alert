@@ -3,7 +3,7 @@
 const EventEmitter = require('events');
 
 // Require local dependencies
-const store  = require('default/public/js/store');
+const store  = require('core/public/js/store');
 const socket = require('socket/public/js/bootstrap');
 
 /**

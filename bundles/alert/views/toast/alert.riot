@@ -1,7 +1,7 @@
 <toast-alert>
   <div class={ getClass() } role="alert">
-    <button type="button" class="close" if={ eden.frontend } data-id={ props.item.id } onclick={ (e) => props.onDismiss(e, props.item) }>
-      <span aria-hidden="true">&times;</span>
+    <button type="button" class={ `btn btn-${this.props.item.type || 'info'} mr-2` } data-id={ props.item.id } onclick={ (e) => props.onDismiss(e, props.item) }>
+      <i class="fa fa-fw fa-times" />
     </button>
     <strong class="mr-3" if={ props.item.title }>{ props.item.title }</strong> <raw html={ props.item.text } />
   </div>

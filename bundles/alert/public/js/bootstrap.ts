@@ -1,10 +1,10 @@
 
 // Require class dependencies
-const EventEmitter = require('events');
+import { EventEmitter } from 'events';
 
 // Require local dependencies
-const store  = require('core/public/js/store');
-const socket = require('socket/public/js/bootstrap');
+import store from 'core/public/js/store';
+import socket from 'socket/public/js/bootstrap';
 
 /**
  * Create Alert class
@@ -237,16 +237,19 @@ class Alert extends EventEmitter {
   }
 }
 
+// built alert
+const builtAlert = new Alert();
+
 /**
  * Set window's new Alert instance
  *
  * @type {Alert}
  */
-window.eden.alert = new Alert();
+window.eden.alert = builtAlert;
 
 /**
  * Export Alert instance
  *
  * @type {Alert}
  */
-exports = module.exports = window.eden.alert;
+export default builtAlert;
